@@ -1,0 +1,10 @@
+# Default ignored files
+/shelf/
+/workspace.xml
+/.name
+/compiler.xml
+/deploymentTargetDropDown.xml
+/gradle.xml
+misc.xml
+render.experimental.xml
+vcs.xml
