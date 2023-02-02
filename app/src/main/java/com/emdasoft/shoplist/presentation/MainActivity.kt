@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.emdasoft.shoplist.databinding.ActivityMainBinding
 import com.emdasoft.shoplist.domain.ShopItem
 
+
 class MainActivity : AppCompatActivity(), ShopListAdapter.SetOnClickListener {
 
     private lateinit var binding: ActivityMainBinding
@@ -27,6 +28,11 @@ class MainActivity : AppCompatActivity(), ShopListAdapter.SetOnClickListener {
 
         viewModel.shopList.observe(this) {
             rvAdapter.submitList(it)
+        }
+
+        binding.btnAddShopItem.setOnClickListener {
+            val intent = ShopItemActivity.newIntentAddItem(this)
+            startActivity(intent)
         }
     }
 
@@ -83,6 +89,8 @@ class MainActivity : AppCompatActivity(), ShopListAdapter.SetOnClickListener {
     }
 
     override fun setOnClickListener(shopItem: ShopItem) {
+        val intent = ShopItemActivity.newIntentEditItem(this, shopItem.id)
+        startActivity(intent)
         Toast.makeText(this, "$shopItem", Toast.LENGTH_SHORT).show()
     }
 

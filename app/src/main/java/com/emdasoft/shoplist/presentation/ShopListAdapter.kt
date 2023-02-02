@@ -1,6 +1,6 @@
 package com.emdasoft.shoplist.presentation
 
-import android.util.Log
+
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,8 +12,6 @@ import com.emdasoft.shoplist.domain.ShopItem
 
 class ShopListAdapter(private val listener: SetOnClickListener) :
     ListAdapter<ShopItem, ShopListAdapter.ShopItemViewHolder>(ShopItemDiffCallback()) {
-
-    var count = 0
 
     class ShopItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
@@ -57,7 +55,6 @@ class ShopListAdapter(private val listener: SetOnClickListener) :
     }
 
     override fun onBindViewHolder(holder: ShopItemViewHolder, position: Int) {
-        Log.d("onBindViewHolder", "${++count}")
         val shopItem = getItem(position)
         holder.bind(shopItem, listener)
     }
