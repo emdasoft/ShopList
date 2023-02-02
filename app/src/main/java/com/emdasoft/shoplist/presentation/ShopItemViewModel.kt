@@ -39,7 +39,7 @@ class ShopItemViewModel : ViewModel() {
         val count = parseInputCount(inputCount)
         val validate = validateInput(name, count)
         if (validate) {
-            val shopItem = ShopItem(name, count.toDouble(), true)
+            val shopItem = ShopItem(name, count, true)
             addShopItemUseCase.addShopItem(shopItem)
             finishWork()
         }
@@ -51,11 +51,10 @@ class ShopItemViewModel : ViewModel() {
         val fieldsValid = validateInput(name, count)
         if (fieldsValid) {
             _shopItem.value?.let {
-                val item = it.copy(title = name, count = count.toDouble())
+                val item = it.copy(title = name, count = count)
                 editShopItemUseCase.editShopItem(item)
                 finishWork()
             }
-
         }
     }
 
@@ -65,14 +64,14 @@ class ShopItemViewModel : ViewModel() {
     }
 
     private fun parseInputName(inputName: String?): String {
-        return inputName?.trim() ?: ""
+        return inputName?.trim() ?: INCORRECT_INPUT_NAME
     }
 
     private fun parseInputCount(inputCount: String?): Double {
         return try {
-            inputCount?.trim()?.toDouble() ?: 0.0
+            inputCount?.trim()?.toDouble() ?: INCORRECT_INPUT_COUNT
         } catch (e: Exception) {
-            0.0
+            INCORRECT_INPUT_COUNT
         }
     }
 
@@ -82,7 +81,7 @@ class ShopItemViewModel : ViewModel() {
             _errorInputName.value = true
             result = false
         }
-        if (count <= 0.0) {
+        if (count <= INCORRECT_INPUT_COUNT) {
             _errorInputCount.value = true
             result = false
         }
@@ -99,5 +98,10 @@ class ShopItemViewModel : ViewModel() {
 
     private fun finishWork() {
         _shouldCloseScreen.value = Unit
+    }
+
+    companion object {
+        private const val INCORRECT_INPUT_COUNT = 0.0
+        private const val INCORRECT_INPUT_NAME = ""
     }
 }

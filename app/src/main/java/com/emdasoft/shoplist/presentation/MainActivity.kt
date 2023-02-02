@@ -1,7 +1,6 @@
 package com.emdasoft.shoplist.presentation
 
 import android.os.Bundle
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.ItemTouchHelper
@@ -91,7 +90,6 @@ class MainActivity : AppCompatActivity(), ShopListAdapter.SetOnClickListener {
     override fun setOnClickListener(shopItem: ShopItem) {
         val intent = ShopItemActivity.newIntentEditItem(this, shopItem.id)
         startActivity(intent)
-        Toast.makeText(this, "$shopItem", Toast.LENGTH_SHORT).show()
     }
 
 }
